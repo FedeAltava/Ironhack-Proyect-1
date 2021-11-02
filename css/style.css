@@ -28,18 +28,28 @@ body {
   
   body button {
     font-size: 30px;
-    background-color: #870007;
+    background-color: #a7d672;
     color: #fff;
     padding: 20px 40px;
     border: 0;
     box-shadow: 0;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-top: 10%;
   }
   
   #game-board {
       float: left;
       padding: 20px 0px;
   }
+  #arrows{
 
-  
+    margin-top: 20%;
+  }
+  #instructions{
+    background-color:  #a7d672;
+    padding: 20px 10px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    color: #fff;
+  }

@@ -9,17 +9,29 @@ let counterForLoadedImages = 0; //Contador de imagenes cargadas
 
 
 let imageBackground = new Image()
-imageBackground.src = '../images/scenary/scenary.png'
+imageBackground.src = 'images/scenary/scenary.png'
 
 let characterImage = new Image()
-characterImage.src = '../images/character/player.png'
+characterImage.src = 'images/character/player.png'
 
 
 //Todas las imagenes que tengo
 
 const imageLinks = [
-    { link: "../images/a_images/aligator.png", name: 'aligator' },
-    { link: "../images/a_images/ant.png", name: 'ant' }
+    { link: "images/a_images/abeja.png", name: 'abeja' },
+    { link: "images/a_images/aguila.png", name: 'aguila' },
+    { link: "images/e_images/erizo.png", name: 'erizo' },
+    { link: "images/e_images/elefante.png", name: 'elefante' },
+    { link: "images/i_images/iglu.png", name: 'iglu' },
+    { link: "images/i_images/indio.png", name: 'indio' },
+    { link: "images/o_images/obeja.png", name: 'obeja' },
+    { link: "images/o_images/oso.png", name: 'oso' },
+    { link: "images/u_images/unicornio.png", name: 'unicornio' },
+    { link: "images/u_images/uva.png", name: 'uva' },
+    { link: "images/random/calabaza.png", name: 'calabaza' },
+    { link: "images/random/casa.png", name: 'casa' },
+    { link: "images/random/cocodrilo.png", name: 'cocodrilo' },
+    { link: "images/random/hormiga.png", name: 'hormiga' },
 ]
 
 
@@ -28,34 +40,59 @@ const arrayOfGameFigures = [];
 const createImageEverySecond = () => {
 
     setInterval(() => {
-        
-    //Generar un numero random, que vaya desde el 0 hasta el maximo del array de imagenes
-    const aleatorio = Math.floor(Math.random()*imageLinks.length)
 
-    //luego acceder a ese array con ese numero que es la posicion dentro de ese array
-    //al ser un objeto que tiene la key link, podemos pasar ese link
-    const imageLink = imageLinks[aleatorio].link
+        //Generar un numero random, que vaya desde el 0 hasta el maximo del array de imagenes
+        const aleatorio = Math.floor(Math.random() * imageLinks.length)
 
-    //Creas una imagen con ese link que será el src de la nueva imagen
-    const image = new Image()
-    image.src = imageLink;
-  
-    //Creas un nuevo objeto GameFigure y le pasamos la imagen que acabamos de crear
-    const newGameFigure = new GameFigure(image)
+        //luego acceder a ese array con ese numero que es la posicion dentro de ese array
+        //al ser un objeto que tiene la key link, podemos pasar ese link
+        const imageLink = imageLinks[aleatorio].link
 
-    //Metemos el nuevo objeto en nuestro array de gameFigures
-    arrayOfGameFigures.push(newGameFigure)
+        //Creas una imagen con ese link que será el src de la nueva imagen
+        const image = new Image()
+        image.src = imageLink;
+
+        //Creas un nuevo objeto GameFigure y le pasamos la imagen que acabamos de crear
+        const newGameFigure = new GameFigure(image)
+
+        //Metemos el nuevo objeto en nuestro array de gameFigures
+        arrayOfGameFigures.push(newGameFigure)
 
     }, 3000)
 }
 
 
 //Funciones ************************
+// comprobar si estan en el mismo lugar
+const checkSamePlace = () => {
+    const bothInX = (characterImage.x - 50) < newGameFigure.x && characterImage.x > newGameFigure.x
+    const bothInY =(characterImage.x - 50) < newGameFigure.y && characterImage.y > newGameFigure.y
+
+    if (bothInX && bothInY) {
+        console.log('coinciden')
+
+
+
+    }
+
+}
+
+
+// const backgroundMusic = new sound("images/sounds/backgroundSound.mp3")
+
+
+
+
+
+
+
+
 
 // load and draw images
 const startGame = () => {
     createImageEverySecond()
     updateCanvas()
+
 }
 
 const clearCanvas = () => {
@@ -80,7 +117,7 @@ const updateCanvas = () => {
 
     //2- Actualizar posicion personaje
     character.update()
-
+    // checkSamePlace()
     //Pintamos gameFigures
     arrayOfGameFigures.forEach((figure) => {
         figure.draw()
@@ -140,14 +177,14 @@ class Character {
 }
 
 
-// Random between 2 numbers :  const rndInt = Math.floor(Math.random() * 6) + 1
+
 
 class GameFigure {
     constructor(image) {
 
         this.width = 90;
         this.height = 90;
-        this.x = Math.floor(Math.random() * CANVAS_WIDTH - this.width ) + this.width
+        this.x = Math.floor(Math.random() * CANVAS_WIDTH - this.width) + this.width
         this.y = 10;
         this.speedY = 3;
         this.image = image;
@@ -166,11 +203,7 @@ class GameFigure {
 //Aquí se ejecutan los eventListeners *********************
 window.onload = () => {
 
-    //queremos un numero entre 0 y 910
-    for(let i = 0; i < 100 ; i++){
-        console.log(Math.floor(Math.random() * CANVAS_WIDTH - 90 ) + 90)
-
-    }
+    
 
     character = new Character(characterImage)
 
@@ -193,7 +226,7 @@ window.onload = () => {
     })
 
 
-    // crear objeto de letra, pensar que funiones quiero que tenga(pintar y actualizar, crear array de letras)
+    
 
 
 
