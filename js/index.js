@@ -8,93 +8,84 @@ const CANVAS_HEIGHT = canvas.height
 let counterForLoadedImages = 0; //Contador de imagenes cargadas
 
 
-// let imageBackground = new Image()
-// imageBackground.src = '../images/scenary/scenary.png'
-// let characterImage = new Image()
-// characterImage.src = '../images/character/player.png'
-// let testImage = new Image()
-// testImage.src = '../images/a_images/ant.png'
+let imageBackground = new Image()
+imageBackground.src = '../images/scenary/scenary.png'
+
+let characterImage = new Image()
+characterImage.src = '../images/character/player.png'
 
 
+//Todas las imagenes que tengo
 
 const imageLinks = [
-    { link: "../images/scenary/scenary.png", name: 'scenary' },
-    { link: "../images/character/player.png", name: 'player' },
     { link: "../images/a_images/aligator.png", name: 'aligator' },
     { link: "../images/a_images/ant.png", name: 'ant' }
 ]
-const loadedImages = {}
-imageLinks.forEach((imagen) => {
-    const img = new Image()
-    img.src = imagen.link
-    img.onload = () => {
-        counterForLoadedImages++
-        loadedImages[imagen.name] = img
-        console.log(loadedImages)
-        if (imageLinks.length === counterForLoadedImages) {
-        }
-    }
-})
 
 
-
-
-
-
-
-const arrayOfImages = [];
+const arrayOfGameFigures = [];
 
 const createImageEverySecond = () => {
-    setInterval(()=>{
-       Object.entries(loadedImages)
-        //Crear logica para que elija de forma random una imagen u otra de "loadedImages"
-        const ownImage = new Images(loadedImages.aligator)
-        //const ownImage = new Images(testImage)
-        arrayOfImages.push(ownImage)
+
+    setInterval(() => {
         
+    //Generar un numero random, que vaya desde el 0 hasta el maximo del array de imagenes
+    const aleatorio = Math.floor(Math.random()*imageLinks.length)
+
+    //luego acceder a ese array con ese numero que es la posicion dentro de ese array
+    //al ser un objeto que tiene la key link, podemos pasar ese link
+    const imageLink = imageLinks[aleatorio].link
+
+    //Creas una imagen con ese link que será el src de la nueva imagen
+    const image = new Image()
+    image.src = imageLink;
+  
+    //Creas un nuevo objeto GameFigure y le pasamos la imagen que acabamos de crear
+    const newGameFigure = new GameFigure(image)
+
+    //Metemos el nuevo objeto en nuestro array de gameFigures
+    arrayOfGameFigures.push(newGameFigure)
+
     }, 3000)
 }
-
-
 
 
 //Funciones ************************
 
 // load and draw images
 const startGame = () => {
-
-    // generateImages()
     createImageEverySecond()
     updateCanvas()
-
-
 }
+
 const clearCanvas = () => {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 }
 
 const paintBackground = () => {
-    ctx.drawImage(loadedImages.scenary, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    ctx.drawImage(imageBackground, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 }
 
-const drawOwnImages = ()=>{
-    arrayOfImages.forEach((image)=>{
-        image.draw()
-    })
-}
 
 //Este es mi loop de animación <----------------
 const updateCanvas = () => {
-    //1 - borrar
+    //1 - limpiar canvas entero
     clearCanvas()
-    //2 actualizar
-    character.update()
-  
-
+    //2 Pintar background
     paintBackground()
+
+
+    //1 - Pintar Personaje
     character.draw()
 
-    drawOwnImages()
+    //2- Actualizar posicion personaje
+    character.update()
+
+    //Pintamos gameFigures
+    arrayOfGameFigures.forEach((figure) => {
+        figure.draw()
+        figure.update()
+    })
 
     requestAnimationFrame(updateCanvas)
 
@@ -103,13 +94,14 @@ const updateCanvas = () => {
 
 //Clases ***********************
 class Character {
-    constructor() {
+    constructor(image) {
         this.x = 500;
         this.y = 600;
         this.speedX = 0;
         this.speedY = 0;
         this.width = 90;
         this.height = 100;
+        this.image = image
     }
 
     moveLeft() {
@@ -127,9 +119,9 @@ class Character {
         //condicion de x + anchura de pj no sea mayor que borde derecho de pantalla
         this.speedX = 5
 
-        if (this.x > 900) {
+        if (this.x > 910) {
 
-            this.x = 900
+            this.x = 910
         }
     }
 
@@ -138,34 +130,33 @@ class Character {
     }
 
     draw() {
-        ctx.drawImage(loadedImages.player, this.x, this.y, this.width, this.height)
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
 
     update() {
         this.x += this.speedX
 
-
-
     }
-
-
 }
 
-class Images {
-    constructor(imageToShow) {
-        this.x = Math.floor(Math.random() * 1000) + 1;
+
+// Random between 2 numbers :  const rndInt = Math.floor(Math.random() * 6) + 1
+
+class GameFigure {
+    constructor(image) {
+
+        this.width = 90;
+        this.height = 90;
+        this.x = Math.floor(Math.random() * CANVAS_WIDTH - this.width ) + this.width
         this.y = 10;
-        this.speedY = 0;
-        this.width = 120;
-        this.height = 100;
-        this.imageToShow = imageToShow;
+        this.speedY = 3;
+        this.image = image;
     }
     draw() {
-        ctx.drawImage(this.imageToShow, this.x, this.y, this.width, this.height)
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
     }
     update() {
         this.y += this.speedY
-
 
     }
 }
@@ -175,8 +166,13 @@ class Images {
 //Aquí se ejecutan los eventListeners *********************
 window.onload = () => {
 
+    //queremos un numero entre 0 y 910
+    for(let i = 0; i < 100 ; i++){
+        console.log(Math.floor(Math.random() * CANVAS_WIDTH - 90 ) + 90)
 
-    character = new Character()
+    }
+
+    character = new Character(characterImage)
 
     //EVENT LISTENERS
     document.getElementById('start-button').addEventListener('click', startGame)

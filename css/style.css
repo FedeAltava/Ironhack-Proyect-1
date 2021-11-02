@@ -1,12 +1,16 @@
 body {
     padding: 0;
     text-align: center;
-    background-color: rgb(172, 241, 243);
+    background-image: url("../images/5656321.jpg");
+    align-items: center;
   }
   
+  
   .game-intro {
+    
     float: left;
     padding: 0% 10%;
+    
   }
   
   .game-intro p {
@@ -37,3 +41,5 @@ body {
       float: left;
       padding: 20px 0px;
   }
+
+  
