@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
+
 <body>
-    <div class="game-intro">
-      <img src="../Ironhack-Proyect-1/images/titulo.png" alt="Girl in a jacket" width="400" height="200">
-        <br />
-        <button id="start-button">Empezar</button>
-        <div id="arrows">
+  <div class="game-intro">
+    <img src="../Ironhack-Proyect-1/images/titulo.png" alt="Girl in a jacket" width="400" height="200">
+    <br />
+    <button id="start-button">Empezar</button>
+    <div id="arrows">
       <p>Usa las flechas para moverte</p>
 
-      
-      
+
+
       <img src="./images/character/arrows.png" alt="" class="arrows-img" />
       <div id="instructions">
         <h2>Instrucciones:</h2>
-        
-        <p>Atrapa 10 imagenes que empiecen por vocal para ganar</p>
+
+        <p>Atrapa 5 imagenes que empiecen por vocal para ganar</p>
       </div>
     </div>
-    
-    </div>
-    <div><canvas id="canvas" width="1000" height="700"></canvas></div>
-    <p style="font-size: 50px;">Score: <span id="score">0</span></p>
-        
 
-    <script type="text/javascript" src="./js/index.js"></script>
+  </div>
+  <div><canvas id="canvas" width="1000" height="700"></canvas></div>
+  <div id="divScore">
+    <p style="font-size: 50px;">Score: <span id="score">0</span></p>
+  </div>
+
+
+  <script type="text/javascript" src="./js/index.js"></script>
 </body>
+
 </html>
