@@ -22,13 +22,13 @@ window.onload = () => {
     const WrongLetter = new Audio('sounds/fail.mp3')
     //Images
     let imageBackground = new Image()
-    imageBackground.src = 'images/scenary/scenary.png'
+    imageBackground.src = './images/scenary/scenary.png'
 
     let characterImage = new Image()
-    characterImage.src = 'images/character/player.png'
+    characterImage.src = './images/character/player.png'
 
     let YouWon = new Image()
-    YouWon.src = 'images/scenary/Has_ganado.jpg'
+    YouWon.src = './images/scenary/Has_ganado.jpg'
 
     const paintYouWon = () => {
         ctx.drawImage(YouWon, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -39,33 +39,33 @@ window.onload = () => {
     //Todas las imagenes que tengo
 
     const imageLinks = [
-        { link: "images/a_images/abeja.png", name: 'abeja', letter: 'A' },
-        { link: "images/a_images/aguila.png", name: 'aguila', letter: 'A' },
-        { link: "images/a_images/araña.png", name: 'araña', letter: 'A' },
-        { link: "images/a_images/arbol.png", name: 'arbol', letter: 'A' },
-        { link: "images/a_images/avion.png", name: 'avion', letter: 'A' },
-        { link: "images/e_images/erizo.png", name: 'erizo', letter: 'E' },
-        { link: "images/e_images/elefante.png", name: 'elefante', letter: 'E' },
-        { link: "images/e_images/escalera.png", name: 'escalera', letter: 'E' },
-        { link: "images/e_images/espada.png", name: 'espada', letter: 'E' },
-        { link: "images/e_images/estatua.png", name: 'estatua', letter: 'E' },
-        { link: "images/i_images/iman.png", name: 'iman', letter: 'I' },
-        { link: "images/i_images/isla.png", name: 'isla', letter: 'I' },
-        { link: "images/i_images/iglu.png", name: 'iglu', letter: 'I' },
-        { link: "images/i_images/indio.png", name: 'indio', letter: 'I' },
-        { link: "images/o_images/obeja.png", name: 'obeja', letter: 'O' },
-        { link: "images/o_images/ojo.png", name: 'ojo', letter: 'O' },
-        { link: "images/o_images/ola.png", name: 'ola', letter: 'O' },
-        { link: "images/o_images/oreja.png", name: 'oreja', letter: 'O' },
-        { link: "images/o_images/oso.png", name: 'oso', letter: 'O' },
-        { link: "images/u_images/unicornio.png", name: 'unicornio', letter: 'U' },
-        { link: "images/u_images/uva.png", name: 'uva', letter: 'U' },
-        { link: "images/u_images/uno.png", name: 'uno', letter: 'U' },
-        { link: "images/u_images/unya.png", name: 'unya', letter: 'U' },
-        { link: "images/random/calabaza.png", name: 'calabaza', letter: 'C' },
-        { link: "images/random/casa.png", name: 'casa', letter: 'C' },
-        { link: "images/random/cocodrilo.png", name: 'cocodrilo', letter: 'C' },
-        { link: "images/random/hormiga.png", name: 'hormiga', letter: 'H' },
+        { link: "./images/a_images/abeja.png", name: 'abeja', letter: 'A' },
+        { link: "./images/a_images/aguila.png", name: 'aguila', letter: 'A' },
+        { link: "./images/a_images/araña.png", name: 'araña', letter: 'A' },
+        { link: "./images/a_images/arbol.png", name: 'arbol', letter: 'A' },
+        { link: "./images/a_images/avion.png", name: 'avion', letter: 'A' },
+        { link: "./images/e_images/erizo.png", name: 'erizo', letter: 'E' },
+        { link: "./images/e_images/elefante.png", name: 'elefante', letter: 'E' },
+        { link: "./images/e_images/escalera.png", name: 'escalera', letter: 'E' },
+        { link: "./images/e_images/espada.png", name: 'espada', letter: 'E' },
+        { link: "./images/e_images/estatua.png", name: 'estatua', letter: 'E' },
+        { link: "./images/i_images/iman.png", name: 'iman', letter: 'I' },
+        { link: "./images/i_images/isla.png", name: 'isla', letter: 'I' },
+        { link: "./images/i_images/iglu.png", name: 'iglu', letter: 'I' },
+        { link: "./images/i_images/indio.png", name: 'indio', letter: 'I' },
+        { link: "./images/o_images/obeja.png", name: 'obeja', letter: 'O' },
+        { link: "./images/o_images/ojo.png", name: 'ojo', letter: 'O' },
+        { link: "./images/o_images/ola.png", name: 'ola', letter: 'O' },
+        { link: "./images/o_images/oreja.png", name: 'oreja', letter: 'O' },
+        { link: "./images/o_images/oso.png", name: 'oso', letter: 'O' },
+        { link: "./images/u_images/unicornio.png", name: 'unicornio', letter: 'U' },
+        { link: "./images/u_images/uva.png", name: 'uva', letter: 'U' },
+        { link: "./images/u_images/uno.png", name: 'uno', letter: 'U' },
+        { link: "./images/u_images/unya.png", name: 'unya', letter: 'U' },
+        { link: "./images/random/calabaza.png", name: 'calabaza', letter: 'C' },
+        { link: "./images/random/casa.png", name: 'casa', letter: 'C' },
+        { link: "./images/random/cocodrilo.png", name: 'cocodrilo', letter: 'C' },
+        { link: "./images/random/hormiga.png", name: 'hormiga', letter: 'H' },
     ]
 
 
