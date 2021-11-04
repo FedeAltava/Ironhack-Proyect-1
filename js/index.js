@@ -7,41 +7,25 @@ window.onload = () => {
     const ctx = canvas.getContext('2d')
     const CANVAS_WIDTH = canvas.width
     const CANVAS_HEIGHT = canvas.height
-
+    let animationFrameId
+    let currentVowel = 'A'
+    let vowelsArray = ['A', 'E', 'I', 'O', 'U']
+    let arrayOfGameFigures = []
     let score = 0
-    let  animationFrameId
     //Audio
     const backGroundSound = new Audio('sounds/backgroundSound.mp3')
     backGroundSound.volume = 0.05
+    backGroundSound.loop = true;
 
     const soundSamePlace = new Audio('sounds/coin.mp3')
     soundSamePlace.volume = 0.05
-    //loop music background --------- Preguntar
-    // const backGroundRepeat = ()=>{
-    //if (typeof backGroundSound == 'boolean'){
-    //     backGroundSound = true;
-    // }
-    // else
-    // {
-    //     backGroundSound.addEventListener('ended', function() {
-    //         
-    //         backGroundSound.play();
-    //     }, false);
-    // }
-    //}
-
+    const WrongLetter = new Audio('sounds/fail.mp3')
     //Images
     let imageBackground = new Image()
     imageBackground.src = 'images/scenary/scenary.png'
 
     let characterImage = new Image()
     characterImage.src = 'images/character/player.png'
-
-    // let characterImageLeft = new Image()
-    // characterImageLeft = 'images/character/character_left.png'
-    // // const paintLeftImage = () => {
-    // //     ctx.drawImage(characterImageLeft, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-    // // }
 
     let YouWon = new Image()
     YouWon.src = 'images/scenary/Has_ganado.jpg'
@@ -57,14 +41,27 @@ window.onload = () => {
     const imageLinks = [
         { link: "images/a_images/abeja.png", name: 'abeja', letter: 'A' },
         { link: "images/a_images/aguila.png", name: 'aguila', letter: 'A' },
-        { link: "images/e_images/erizo.png", name: 'erizo', letter: 'A' },
-        { link: "images/e_images/elefante.png", name: 'elefante', letter: 'A' },
+        { link: "images/a_images/araña.png", name: 'araña', letter: 'A' },
+        { link: "images/a_images/arbol.png", name: 'arbol', letter: 'A' },
+        { link: "images/a_images/avion.png", name: 'avion', letter: 'A' },
+        { link: "images/e_images/erizo.png", name: 'erizo', letter: 'E' },
+        { link: "images/e_images/elefante.png", name: 'elefante', letter: 'E' },
+        { link: "images/e_images/escalera.png", name: 'escalera', letter: 'E' },
+        { link: "images/e_images/espada.png", name: 'espada', letter: 'E' },
+        { link: "images/e_images/estatua.png", name: 'estatua', letter: 'E' },
+        { link: "images/i_images/iman.png", name: 'iman', letter: 'I' },
+        { link: "images/i_images/isla.png", name: 'isla', letter: 'I' },
         { link: "images/i_images/iglu.png", name: 'iglu', letter: 'I' },
         { link: "images/i_images/indio.png", name: 'indio', letter: 'I' },
         { link: "images/o_images/obeja.png", name: 'obeja', letter: 'O' },
+        { link: "images/o_images/ojo.png", name: 'ojo', letter: 'O' },
+        { link: "images/o_images/ola.png", name: 'ola', letter: 'O' },
+        { link: "images/o_images/oreja.png", name: 'oreja', letter: 'O' },
         { link: "images/o_images/oso.png", name: 'oso', letter: 'O' },
         { link: "images/u_images/unicornio.png", name: 'unicornio', letter: 'U' },
         { link: "images/u_images/uva.png", name: 'uva', letter: 'U' },
+        { link: "images/u_images/uno.png", name: 'uno', letter: 'U' },
+        { link: "images/u_images/unya.png", name: 'unya', letter: 'U' },
         { link: "images/random/calabaza.png", name: 'calabaza', letter: 'C' },
         { link: "images/random/casa.png", name: 'casa', letter: 'C' },
         { link: "images/random/cocodrilo.png", name: 'cocodrilo', letter: 'C' },
@@ -72,9 +69,20 @@ window.onload = () => {
     ]
 
 
-    let arrayOfGameFigures = []
+   
 
     //Funciones ************************
+    const currentVowelDraw = ()=>{
+        ctx.font = "60px Verdana";
+        ctx.fillText(currentVowel , 10, 60) 
+
+    }
+    function drawScore() {
+        ctx.font = "30px Verdana";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Score: "+score, 850, 60);
+    }
+
 
     const createImageEverySecond = () => {
 
@@ -86,29 +94,36 @@ window.onload = () => {
             //luego acceder a ese array con ese numero que es la posicion dentro de ese array
             //al ser un objeto que tiene la key link, podemos pasar ese link
             const imageLink = imageLinks[aleatorio].link
-            
+
             const letter = imageLinks[aleatorio].letter
 
-            console.log(letter)
             
+
             //Creas una imagen con ese link que será el src de la nueva imagen
             const image = new Image()
             image.src = imageLink
-            
+
             //Creas un nuevo objeto GameFigure y le pasamos la imagen que acabamos de crear
-            const newGameFigure = new GameFigure(image,letter)
+            const newGameFigure = new GameFigure(image, letter)
 
             //Metemos el nuevo objeto en nuestro array de gameFigures
             arrayOfGameFigures.push(newGameFigure)
 
-        }, 3000)
+        }, 2000)
     }
-
-    let vowelsArray=['A','E','I','O','U']
-  
+    
+//Da un index aleatorio con vocal
+    const giveVowel = () => {
         
-   
-   
+        setInterval(() => {
+            let randomIndex = Math.floor(Math.random()*vowelsArray.length)
+            
+            currentVowel = vowelsArray[randomIndex]
+            
+        }, 9000)
+    }
+    
+// comprueba las colisiones
     const checkCollision = (myCharacter, gameFigure) => {
 
 
@@ -116,17 +131,21 @@ window.onload = () => {
             myCharacter.x + myCharacter.width > gameFigure.x &&  //check lado derecho
             myCharacter.y < gameFigure.y + gameFigure.height &&  //check lado de arriba
             myCharacter.height + myCharacter.y > gameFigure.y) {
-                if(vowelsArray.includes(gameFigure.letter)){
-                 score++   
-                }
+            if (currentVowel === gameFigure.letter) {
+                score++
+                soundSamePlace.play()
+               gameFigure.picked = true; 
+            }else{
+                WrongLetter.play()
+            }
+
             
-            gameFigure.picked = true;
-            soundSamePlace.play()
-            document.getElementById('score').innerText = score
+            
+            
 
 
             if (score === 5) {
-             
+
                 setTimeout(() => {
                     cancelAnimationFrame(animationFrameId)
                 })
@@ -145,6 +164,7 @@ window.onload = () => {
 
     // load and draw images
     const startGame = () => {
+        giveVowel()
         createImageEverySecond()
         updateCanvas()
         backGroundSound.play()
@@ -174,7 +194,7 @@ window.onload = () => {
         moveLeft() {
 
             this.speedX = -5
-            
+
         }
 
         moveRight() {
@@ -210,7 +230,7 @@ window.onload = () => {
 
 
     class GameFigure {
-        constructor(image,letter) {
+        constructor(image, letter) {
             this.width = 90;
             this.height = 90;
             this.x = Math.floor(Math.random() * (CANVAS_WIDTH - this.width))
@@ -238,6 +258,8 @@ window.onload = () => {
 
         clearCanvas()
         paintBackground()
+        currentVowelDraw()
+        drawScore() 
         character.update()
         character.checkLimits()
         character.draw()
@@ -253,7 +275,7 @@ window.onload = () => {
         deleteGameFigures()
 
         animationFrameId = requestAnimationFrame(updateCanvas)
-         
+
     }
 
 
@@ -267,7 +289,7 @@ window.onload = () => {
             character.moveRight();
         } else if (event.key === "ArrowLeft") {
             character.moveLeft();
-            
+
         }
     })
 
